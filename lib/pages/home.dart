@@ -35,6 +35,7 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,7 +44,8 @@ class _HomePageState extends State<HomePage> {
         backgroundColor: Colors.deepOrange,
         leading: IconButton(
           icon: const Icon(Icons.menu_sharp),
-          onPressed: () {  },
+          onPressed: () {
+          },
         ),
       ),
       body: Center(
@@ -93,11 +95,11 @@ class _HomePageState extends State<HomePage> {
                                 ),
                                 const SizedBox(height: 8),
                                 IconButton(
-                                  onPressed: (){},
-                                   icon: const Icon(Icons.star),
-                                   color: Colors.blueGrey,
-                                   padding: const EdgeInsets.only(left: 0),
-                                   alignment: Alignment.centerLeft,
+                                  onPressed: () {},
+                                  icon: const Icon(Icons.star),
+                                  color: Colors.blueGrey,
+                                  padding: const EdgeInsets.only(left: 0),
+                                  alignment: Alignment.centerLeft,
                                 )
                               ],
                             ),

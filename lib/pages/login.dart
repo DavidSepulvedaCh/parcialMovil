@@ -98,7 +98,6 @@ class _LoginState extends State<Login> {
         backgroundColor: MaterialStateProperty.all<Color>(HexColor('#E64A19')),
       ),
       onPressed: () {
-         Navigator.push(context, MaterialPageRoute(builder: (context) => const HomePage()));
       },
       child: const Text(
         'Ingresar',
