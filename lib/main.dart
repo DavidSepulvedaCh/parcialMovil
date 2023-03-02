@@ -1,4 +1,5 @@
 import 'package:parcial/exports.dart';
+import 'package:parcial/pages/login.dart';
 
 void main() {
   runApp(MyApp());
@@ -12,7 +13,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       initialRoute: '/',
       routes: {
-        '/':(context) => HomePage()
+        '/':(context) => Login()
       },
     );
   }
