@@ -45,7 +45,38 @@ class _HomePageState extends State<HomePage> {
         leading: IconButton(
           icon: const Icon(Icons.menu_sharp),
           onPressed: () {
+            Scaffold.of(context).openDrawer();
           },
+        ),
+      ),
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: <Widget>[
+            const DrawerHeader(
+              decoration: BoxDecoration(
+                color: Colors.deepOrange,
+              ),
+              child: Text(
+                'Menu de opciones',
+                style: TextStyle(color: Colors.white, fontSize: 35),
+              ),
+            ),
+            ListTile(
+              leading: const Icon(Icons.grid_4x4_rounded),
+              title: const Text('Productos en cuadricula'),
+              onTap: () {
+                
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.list),
+              title: const Text('Productos en lista'),
+              onTap: () {
+                
+              },
+            ),
+          ],
         ),
       ),
       body: Center(
