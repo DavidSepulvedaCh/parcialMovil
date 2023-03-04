@@ -67,9 +67,12 @@ class _GrillaState extends State<Grilla> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        appBar: AppBar(title: const Text('Lista de usuarios')),
+        appBar: AppBar(
+          title: const Text('Lista de productos'),
+          backgroundColor: Colors.deepOrange,
+        ),
         body: GridView.count(
-          padding: const EdgeInsets.all(10),
+          padding: const EdgeInsets.all(5),
           crossAxisSpacing: 5,
           mainAxisSpacing: 5,
           crossAxisCount: 2,
@@ -79,11 +82,11 @@ class _GrillaState extends State<Grilla> {
                 child: Column(
                   children: [
                     Column(
-                      children: const [
-                        /*Image.network(productss[index].image!,
-                              height: 90, fit: BoxFit.cover)*/
-                        SizedBox(
-                          height: 90,
+                      children: [
+                        Container(
+                          margin: const EdgeInsets.all(15.0),
+                          child: Image.network(productss[index].image!,
+                              height: 90, fit: BoxFit.cover),
                         )
                       ],
                     ),
@@ -100,7 +103,7 @@ class _GrillaState extends State<Grilla> {
                           productss[index].userName!,
                           textAlign: TextAlign.left,
                           style: const TextStyle(
-                              fontWeight: FontWeight.bold,
+                              fontWeight: FontWeight.w200,
                               fontFamily: 'Raleway'),
                         ),
                         Row(
@@ -115,10 +118,13 @@ class _GrillaState extends State<Grilla> {
                                   fontFamily: 'Raleway'),
                             ),
                             const SizedBox(
-                              width: 85,
+                              width: 90,
                             ),
                             IconButton(
-                              icon: const Icon(Icons.star),
+                              icon: const Icon(
+                                Icons.star,
+                                color: Colors.deepOrangeAccent,
+                              ),
                               onPressed: () {},
                             )
                           ],
