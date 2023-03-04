@@ -57,6 +57,9 @@ class _GrillaState extends State<Grilla> {
             context, MaterialPageRoute(builder: (context) => const Grilla()));
         break;
       case 2:
+        print("FUNCION DE FAV'S");
+        break;
+      case 3:
         logout();
         break;
     }
@@ -147,6 +150,10 @@ class _GrillaState extends State<Grilla> {
             const BottomNavigationBarItem(
               icon: Icon(Icons.grid_4x4, color: Colors.deepOrange),
               label: 'Grilla',
+            ),
+            const BottomNavigationBarItem(
+              icon: Icon(Icons.favorite, color: Colors.deepOrange),
+              label: 'Favoritos',
             ),
             const BottomNavigationBarItem(
               icon: Icon(Icons.logout, color: Colors.deepOrange),
