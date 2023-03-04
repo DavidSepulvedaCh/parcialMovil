@@ -11,9 +11,9 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-
   /* ==================Functions================= */
 
+  int _currentIndex = 0;
   void logout() async {
     SharedService.prefs.clear();
     Navigator.pushNamed(context, '/login');
@@ -33,6 +33,25 @@ class _HomePageState extends State<HomePage> {
     return register;
   }
 
+  void _onItemTapped(int index) {
+    setState(() {
+      _currentIndex = index;
+    });
+    switch (index) {
+      case 0:
+        Navigator.pushReplacement(
+            context, MaterialPageRoute(builder: (context) => const HomePage()));
+        break;
+      case 1:
+        Navigator.pushReplacement(
+            context, MaterialPageRoute(builder: (context) => const Grilla()));
+        break;
+      case 2:
+        logout();
+        break;
+    }
+  }
+
   @override
   void initState() {
     super.initState();
@@ -49,42 +68,6 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         title: const Text('Lista de productos'),
         backgroundColor: Colors.deepOrange,
-        leading: IconButton(
-          icon: const Icon(Icons.menu_sharp),
-          onPressed: () {
-            Scaffold.of(context).openDrawer();
-          },
-        ),
-      ),
-      drawer: Drawer(
-        child: ListView(
-          padding: EdgeInsets.zero,
-          children: <Widget>[
-            const DrawerHeader(
-              decoration: BoxDecoration(
-                color: Colors.deepOrange,
-              ),
-              child: Text(
-                'Menu de opciones',
-                style: TextStyle(color: Colors.white, fontSize: 35),
-              ),
-            ),
-            ListTile(
-              leading: const Icon(Icons.grid_4x4_rounded),
-              title: const Text('Productos en cuadricula'),
-              onTap: () {},
-            ),
-            ListTile(
-              leading: const Icon(Icons.list),
-              title: const Text('Productos en lista'),
-              onTap: () {},
-            ),
-            IconButton(
-              icon: Icon(Icons.logout),
-              onPressed: logout
-            ),
-          ],
-        ),
       ),
       body: Center(
         child: ListView.builder(
@@ -146,11 +129,31 @@ class _HomePageState extends State<HomePage> {
                       ],
                     ),
                   ),
-                )
+                ),
               ],
             );
           },
         ),
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: _currentIndex,
+        onTap: _onItemTapped,
+        // ignore: prefer_const_literals_to_create_immutables
+        items: [
+          const BottomNavigationBarItem(
+            icon: Icon(Icons.list, color: Colors.deepOrange),
+            label: 'Lista',
+          ),
+          const BottomNavigationBarItem(
+            icon: Icon(Icons.grid_4x4, color: Colors.deepOrange),
+            label: 'Grilla',
+          ),
+          const BottomNavigationBarItem(
+            icon: Icon(Icons.logout, color: Colors.deepOrange),
+            label: 'Salir',
+          ),
+        ],
+        selectedLabelStyle: const TextStyle(color: Colors.red),
       ),
     );
   }
