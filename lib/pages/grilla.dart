@@ -42,8 +42,10 @@ class _GrillaState extends State<Grilla> {
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         home: Scaffold(
-          backgroundColor: Colors.deepOrange,
-          appBar: AppBar(title: const Text('Lista de usuarios')),
+          appBar: AppBar(
+            title: const Text('Lista de usuarios'),
+            backgroundColor: Colors.deepOrange,
+          ),
           body: GridView.count(
             padding: const EdgeInsets.all(10),
             crossAxisSpacing: 5,
@@ -55,12 +57,9 @@ class _GrillaState extends State<Grilla> {
                   child: Column(
                     children: [
                       Column(
-                        children: const [
-                          /*Image.network(productss[index].image!,
-                              height: 90, fit: BoxFit.cover)*/
-                          SizedBox(
-                            height: 90,
-                          )
+                        children: [
+                          Image.network(productss[index].image!,
+                              height: 90, fit: BoxFit.cover)
                         ],
                       ),
                       Column(
