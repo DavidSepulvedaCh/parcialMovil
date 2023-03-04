@@ -11,6 +11,14 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+
+  /* ==================Functions================= */
+
+  void logout() async {
+    SharedService.prefs.clear();
+    Navigator.pushNamed(context, '/login');
+  }
+
   List<Product> productss = <Product>[];
   Future<List<Product>> getProducts() async {
     var url = 'https://api.npoint.io/9c5fef5b63af7f36fb2d';
@@ -34,7 +42,6 @@ class _HomePageState extends State<HomePage> {
       });
     });
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -65,16 +72,16 @@ class _HomePageState extends State<HomePage> {
             ListTile(
               leading: const Icon(Icons.grid_4x4_rounded),
               title: const Text('Productos en cuadricula'),
-              onTap: () {
-                
-              },
+              onTap: () {},
             ),
             ListTile(
               leading: const Icon(Icons.list),
               title: const Text('Productos en lista'),
-              onTap: () {
-                
-              },
+              onTap: () {},
+            ),
+            IconButton(
+              icon: Icon(Icons.logout),
+              onPressed: logout
             ),
           ],
         ),

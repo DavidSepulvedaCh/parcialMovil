@@ -1,12 +1,104 @@
 import 'package:parcial/exports.dart';
+import 'package:parcial/models/login_request_model.dart';
+import 'package:parcial/services/api_service.dart';
 
 class Login extends StatefulWidget {
+  const Login({super.key});
+
   @override
   State<Login> createState() => _LoginState();
 }
 
 class _LoginState extends State<Login> {
   bool isRememberMe = false;
+  TextEditingController emailTextController= TextEditingController();
+  TextEditingController passwordTextController= TextEditingController();
+
+  /* ==================Functions================= */
+  
+  void submit() async {
+    if (validate()) {
+      LoginRequestModel model = LoginRequestModel(
+          email: emailTextController.text,
+          password: passwordTextController.text);
+      final response = await APIService.login(model);
+      if (response == 0) {
+        // ignore: use_build_context_synchronously
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => const HomePage()));
+      } else if (response == 1) {
+        // ignore: use_build_context_synchronously
+        showDialog(
+            context: context,
+            builder: (context) => AlertDialog(
+                  title: const Text('Error'),
+                  content: const Text('Usuario o contraseña incorrecta'),
+                  actions: [
+                    TextButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        child: const Text('Ok')),
+                  ],
+                ));
+      } else {
+        // ignore: use_build_context_synchronously
+        showDialog(
+            context: context,
+            builder: (context) => AlertDialog(
+                  title: const Text('Error'),
+                  content: const Text('Ocurrió un error. Intente más tarde'),
+                  actions: [
+                    TextButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        child: const Text('Ok')),
+                  ],
+                ));
+      }
+    }
+  }
+
+  bool validate() {
+    RegExp emailValidator = RegExp(
+        r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$');
+
+    if (emailTextController.text == '' || passwordTextController.text == '') {
+      showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+                title: const Text('Error'),
+                content: const Text('Debes llenar todos los campos'),
+                actions: [
+                  TextButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      child: const Text('Ok')),
+                ],
+              ));
+      return false;
+    }
+    if (!emailValidator.hasMatch(emailTextController.text)) {
+      showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+                title: const Text('Error'),
+                content: const Text('Email inválido'),
+                actions: [
+                  TextButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      child: const Text('Ok')),
+                ],
+              ));
+      return false;
+    }
+    return true;
+  }
+
   /* ===============WIDGET'S===================== */
   Widget buildEmail() {
     return Column(
@@ -31,6 +123,7 @@ class _LoginState extends State<Login> {
           ),
           height: 60,
           child: TextField(
+            controller: emailTextController,
             keyboardType: TextInputType.emailAddress,
             style: const TextStyle(color: Colors.black),
             decoration: InputDecoration(
@@ -68,6 +161,7 @@ class _LoginState extends State<Login> {
           ),
           height: 60,
           child: TextField(
+            controller: passwordTextController,
             obscureText: true,
             style: const TextStyle(color: Colors.black),
             decoration: InputDecoration(
@@ -83,33 +177,30 @@ class _LoginState extends State<Login> {
   }
 
   Widget buildBtnLogin() {
-  return Container(
-    padding: const EdgeInsets.symmetric(vertical: 25),
-    width: double.infinity,
-    child: ElevatedButton(
-      style: ButtonStyle(
-        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-          RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10.0),
+    return Container(
+      padding: const EdgeInsets.symmetric(vertical: 25),
+      width: double.infinity,
+      child: ElevatedButton(
+        style: ButtonStyle(
+          shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+            RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10.0),
+            ),
           ),
+          minimumSize:
+              MaterialStateProperty.all<Size>(const Size(double.infinity, 50)),
+          backgroundColor:
+              MaterialStateProperty.all<Color>(HexColor('#E64A19')),
         ),
-        minimumSize:
-            MaterialStateProperty.all<Size>(const Size(double.infinity, 50)),
-        backgroundColor: MaterialStateProperty.all<Color>(HexColor('#E64A19')),
-      ),
-      onPressed: () {
-      },
-      child: const Text(
-        'Ingresar',
-        style: TextStyle(
-          color: Colors.white,
-          fontWeight: FontWeight.bold,
-          fontSize: 18
+        onPressed: submit,
+        child: const Text(
+          'Ingresar',
+          style: TextStyle(
+              color: Colors.white, fontWeight: FontWeight.bold, fontSize: 18),
         ),
       ),
-    ),
-  );
-}
+    );
+  }
 
   @override
   Widget build(BuildContext context) {

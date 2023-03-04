@@ -1,19 +1,23 @@
 import 'package:parcial/exports.dart';
-import 'package:parcial/pages/login.dart';
 
-void main() {
-  runApp(MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await SharedService.setUp();
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Parcial',
       debugShowCheckedModeBanner: false,
-      initialRoute: '/',
+      initialRoute: '/login',
       routes: {
-        '/':(context) => const HomePage()
+        '/':(context) => const HomePage(),
+        '/login':(context) => const Login()
       },
     );
   }
