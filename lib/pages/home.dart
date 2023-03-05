@@ -16,10 +16,6 @@ class _HomePageState extends State<HomePage> {
   /* ==================Functions================= */
 
   int _currentIndex = 0;
-  void logout() async {
-    SharedService.prefs.clear();
-    Navigator.pushNamed(context, '/login');
-  }
 
   List<Product> productss = <Product>[];
   Future<List<Product>> getProducts() async {
@@ -53,7 +49,7 @@ class _HomePageState extends State<HomePage> {
         });
         break;
       case 3:
-        logout();
+        Functions.logout(context);
         break;
     }
   }

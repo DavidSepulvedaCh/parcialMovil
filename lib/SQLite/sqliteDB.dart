@@ -14,20 +14,20 @@ class SQLiteDB {
   }
 
   static Future<void> saveFavorites(List<Product> products) async {
-  final db = await _openDB();
+    final db = await _openDB();
 
-  final batch = db.batch();
+    final batch = db.batch();
 
-  for (final product in products) {
-    batch.insert(
-      'products',
-      product.toJson(),
-      conflictAlgorithm: ConflictAlgorithm.replace,
-    );
+    for (final product in products) {
+      batch.insert(
+        'products',
+        product.toJson(),
+        conflictAlgorithm: ConflictAlgorithm.replace,
+      );
+    }
+
+    await batch.commit();
   }
-
-  await batch.commit();
-}
 
   static Future<bool> existsFavorite(String id) async {
     Database database = await _openDB();
@@ -67,5 +67,25 @@ class SQLiteDB {
             description: products[index]['description'],
             photo: products[index]['photo'],
             price: products[index]['price']));
+  }
+
+  static Future<List<String>> getFavoritesListIds() async {
+    Database database = await _openDB();
+    String idUser = SharedService.prefs.getString('id') ?? 'default';
+    if (idUser == 'default') {
+      return [];
+    }
+    final List<Map<String, dynamic>> products =
+        await database.query('products');
+
+    return List.generate(
+      products.length,
+      (index) => products[index]['id'],
+    );
+  }
+
+  static Future<void> deleteFavorites() async {
+    Database database = await _openDB();
+    await database.execute("DELETE FROM products");
   }
 }

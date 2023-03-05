@@ -10,29 +10,38 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
-
   @override
   void initState() {
     super.initState();
     isLoggedIn();
   }
 
+  @override
+  void dispose() async {
+    await Functions.updateFavorites();
+    super.dispose();
+  }
+
+  loginSuccess() async {
+    List<Product> favorites = await APIService.getFavorites();
+    await SQLiteDB.saveFavorites(favorites);
+    // ignore: use_build_context_synchronously
+    Navigator.pushNamed(context, '/');
+  }
+
   isLoggedIn() async {
     var session = await SharedService.isLoggedIn();
     if (session) {
-      List<Product> favorites = await APIService.getFavorites();
-      SQLiteDB.saveFavorites(favorites);
-      // ignore: use_build_context_synchronously
-      Navigator.pushNamed(context, '/');
+      await loginSuccess();
     }
   }
 
   bool isRememberMe = false;
-  TextEditingController emailTextController= TextEditingController();
-  TextEditingController passwordTextController= TextEditingController();
+  TextEditingController emailTextController = TextEditingController();
+  TextEditingController passwordTextController = TextEditingController();
 
   /* ==================Functions================= */
-  
+
   void submit() async {
     if (validate()) {
       LoginRequestModel model = LoginRequestModel(
@@ -40,9 +49,7 @@ class _LoginState extends State<Login> {
           password: passwordTextController.text);
       final response = await APIService.login(model);
       if (response == 0) {
-        // ignore: use_build_context_synchronously
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) => const HomePage()));
+        loginSuccess();
       } else if (response == 1) {
         // ignore: use_build_context_synchronously
         showDialog(

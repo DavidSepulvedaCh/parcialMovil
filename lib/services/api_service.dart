@@ -160,4 +160,25 @@ class APIService {
       return false;
     }
   }
+  
+  static Future<bool> updateFavorites(List<String> favoritesListIds) async {
+    Uri url = Uri.http(Config.apiURL, Config.updateFavorite);
+    final header = {
+      "Access-Control-Allow-Origin": "*",
+      'Content-Type': 'application/json',
+      'Accept': '*/*'
+    };
+    var token = SharedService.prefs.getString('token');
+    var id = SharedService.prefs.getString('id');
+    final response = await http
+        .post(url,
+            headers: header, body: jsonEncode({'ids': favoritesListIds, 'idUser': id, 'token': token}))
+        .timeout(const Duration(seconds: 5));
+    if (response.statusCode == 200) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
 }
