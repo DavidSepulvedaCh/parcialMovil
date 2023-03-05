@@ -10,3 +10,5 @@ export 'package:parcial/services/api_service.dart';
 export 'package:parcial/widgets/buttonFavorite.dart';
 export 'package:parcial/SQLite/sqliteDB.dart';
 export 'package:parcial/functions/functions.dart';
+export 'package:parcial/pages/favorites/home_favorites.dart';
+export 'package:parcial/pages/favorites/grilla_favorites.dart';

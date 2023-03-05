@@ -2,14 +2,14 @@ import 'dart:convert';
 import 'package:parcial/exports.dart';
 import 'package:parcial/services/api_service.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+class HomeFavorites extends StatefulWidget {
+  const HomeFavorites({super.key});
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<HomeFavorites> createState() => _HomeFavoritesState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomeFavoritesState extends State<HomeFavorites> {
   int _currentIndex = 0;
 
   /* ==================Functions================= */
@@ -30,7 +30,7 @@ class _HomePageState extends State<HomePage> {
 
   List<Product> productss = <Product>[];
   Future<List<Product>> getProducts() async {
-    var register = await APIService.getProducts();
+    var register = await SQLiteDB.getFavorites();
     return register;
   }
 
@@ -41,16 +41,16 @@ class _HomePageState extends State<HomePage> {
     switch (index) {
       case 0:
         Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (context) => const HomePage()));
+            context, MaterialPageRoute(builder: (context) => const HomeFavorites()));
         break;
       case 1:
         Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (context) => const Grilla()));
+            context, MaterialPageRoute(builder: (context) => const GrillaFavorites()));
         break;
       case 2:
         setState(() {
           Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (context) => const HomeFavorites()));
+            context, MaterialPageRoute(builder: (context) => const HomePage()));
         });
         break;
       case 3:
@@ -149,7 +149,7 @@ class _HomePageState extends State<HomePage> {
             label: 'Grilla',
           ),
           const BottomNavigationBarItem(
-            icon: Icon(Icons.favorite, color: Colors.deepOrange),
+            icon: Icon(Icons.all_inbox, color: Colors.deepOrange),
             label: 'Favoritos',
           ),
           const BottomNavigationBarItem(

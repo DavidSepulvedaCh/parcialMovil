@@ -3,19 +3,19 @@ import 'package:flutter/services.dart';
 import 'package:parcial/exports.dart';
 import 'package:parcial/services/api_service.dart';
 
-class Grilla extends StatefulWidget {
-  const Grilla({super.key});
+class GrillaFavorites extends StatefulWidget {
+  const GrillaFavorites({super.key});
 
   @override
-  State<Grilla> createState() => _GrillaState();
+  State<GrillaFavorites> createState() => _GrillaFavoritesState();
 
   static count({required int crossAxisCount, required List<Center> children}) {}
 }
 
-class _GrillaState extends State<Grilla> {
+class _GrillaFavoritesState extends State<GrillaFavorites> {
   List<Product> productss = <Product>[];
   Future<List<Product>> getProducts() async {
-    var register = await APIService.getProducts();
+    var register = await SQLiteDB.getFavorites();
     return register;
   }
 
@@ -23,6 +23,10 @@ class _GrillaState extends State<Grilla> {
   @override
   void initState() {
     super.initState();
+    setProducts();
+  }
+
+  void setProducts() {
     getProducts().then((value) {
       setState(() {
         productss.addAll(value);
@@ -37,11 +41,11 @@ class _GrillaState extends State<Grilla> {
     switch (index) {
       case 0:
         Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (context) => const HomePage()));
+            context, MaterialPageRoute(builder: (context) => const HomeFavorites()));
         break;
       case 1:
         Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (context) => const Grilla()));
+            context, MaterialPageRoute(builder: (context) => const GrillaFavorites()));
         break;
       case 2:
         Navigator.pushReplacement(
@@ -136,10 +140,10 @@ class _GrillaState extends State<Grilla> {
             ),
             const BottomNavigationBarItem(
               icon: Icon(Icons.grid_4x4, color: Colors.deepOrange),
-              label: 'Grilla',
+              label: 'GrillaFavorites',
             ),
             const BottomNavigationBarItem(
-              icon: Icon(Icons.favorite, color: Colors.deepOrange),
+              icon: Icon(Icons.all_inbox, color: Colors.deepOrange),
               label: 'Favoritos',
             ),
             const BottomNavigationBarItem(
