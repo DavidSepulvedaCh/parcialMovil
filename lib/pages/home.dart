@@ -68,15 +68,12 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Lista de productos'),
-        backgroundColor: Colors.deepOrange,
-        automaticallyImplyLeading: false,
-      ),
-      body: Center(
+
+
+  /* ==============WIDGET===================== */
+
+  Widget buildLista(BuildContext context) {
+    return Center(
         child: ListView.builder(
           itemCount: productss.length,
           itemBuilder: (BuildContext context, int index) {
@@ -135,6 +132,19 @@ class _HomePageState extends State<HomePage> {
             );
           },
         ),
+      );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Lista de productos'),
+        backgroundColor: Colors.deepOrange,
+        automaticallyImplyLeading: false,
+      ),
+      body: Center(
+        child: buildLista(context),
       ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
