@@ -61,13 +61,53 @@ class APIService {
         .timeout(const Duration(seconds: 5));
     if (response.statusCode == 200) {
       List<dynamic> jsonList = jsonDecode(response.body);
-      print(jsonList);
       List<Product> productList = jsonList
           .map((json) => Product.fromJson(json))
           .toList();
       return productList;
     } else {
       return [];
+    }
+  }
+
+  static Future<int> addFavorite(String idUser, String idOffer) async {
+    Uri url = Uri.http(Config.apiURL, Config.addFavorite);
+    final header = {
+      "Access-Control-Allow-Origin": "*",
+      'Content-Type': 'application/json',
+      'Accept': '*/*'
+    };
+    var token = SharedService.prefs.getString('token');
+    final response = await http
+        .post(url, headers: header, body: jsonEncode({'idUser': idUser, 'idOffer': idOffer, 'token': token}))
+        .timeout(const Duration(seconds: 5));
+    if (response.statusCode == 200) {
+      return 0;
+    } else if(response.statusCode == 410){
+      bool success = await removeFavorite(idUser, idOffer, token);
+      if(success){
+        return 1;
+      }else{
+        return -1;
+      }
+    }
+    return -1;
+  }
+  
+  static Future<bool> removeFavorite(String idUser, String idOffer, String? token) async {
+    Uri url = Uri.http(Config.apiURL, Config.removeFavorite);
+    final header = {
+      "Access-Control-Allow-Origin": "*",
+      'Content-Type': 'application/json',
+      'Accept': '*/*'
+    };
+    final response = await http
+        .post(url, headers: header, body: jsonEncode({'idUser': idUser, 'idOffer': idOffer, 'token': token}))
+        .timeout(const Duration(seconds: 5));
+    if (response.statusCode == 200) {
+      return true;
+    } else{
+      return false;
     }
   }
 }

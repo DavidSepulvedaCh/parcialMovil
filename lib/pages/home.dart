@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'package:parcial/exports.dart';
-import 'package:http/http.dart' as http;
 import 'package:parcial/services/api_service.dart';
 
 class HomePage extends StatefulWidget {
@@ -107,17 +106,11 @@ class _HomePageState extends State<HomePage> {
                                 ),
                                 const SizedBox(height: 8),
                                 Text(
-                                  productss[index].price.toString()!,
+                                  "\$ ${productss[index].price}",
                                   style: const TextStyle(fontFamily: 'Raleway'),
                                 ),
                                 const SizedBox(height: 8),
-                                IconButton(
-                                  onPressed: () {},
-                                  icon: const Icon(Icons.star),
-                                  color: Colors.blueGrey,
-                                  padding: const EdgeInsets.only(left: 0),
-                                  alignment: Alignment.centerLeft,
-                                )
+                                ButtonFavorite(idOffer: productss[index].id)
                               ],
                             ),
                           ),

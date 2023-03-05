@@ -6,3 +6,5 @@ export 'package:hexcolor/hexcolor.dart';
 export 'package:parcial/pages/login.dart';
 export 'package:parcial/pages/grilla.dart';
 export 'services/shared_service.dart';
+export 'package:parcial/services/api_service.dart';
+export 'package:parcial/widgets/buttonFavorite.dart';
