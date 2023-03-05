@@ -40,8 +40,6 @@ class _GrillaState extends State<Grilla> {
             context, MaterialPageRoute(builder: (context) => const HomePage()));
         break;
       case 1:
-        Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (context) => const Grilla()));
         break;
       case 2:
         Navigator.pushReplacement(

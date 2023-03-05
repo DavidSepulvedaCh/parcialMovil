@@ -40,8 +40,6 @@ class _HomeFavoritesState extends State<HomeFavorites> {
     });
     switch (index) {
       case 0:
-        Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (context) => const HomeFavorites()));
         break;
       case 1:
         Navigator.pushReplacement(

@@ -44,12 +44,10 @@ class _GrillaFavoritesState extends State<GrillaFavorites> {
             context, MaterialPageRoute(builder: (context) => const HomeFavorites()));
         break;
       case 1:
-        Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (context) => const GrillaFavorites()));
         break;
       case 2:
         Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (context) => const HomeFavorites()));
+            context, MaterialPageRoute(builder: (context) => const HomePage()));
         break;
       case 3:
         Functions.logout(context);
