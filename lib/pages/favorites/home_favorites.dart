@@ -1,6 +1,4 @@
-import 'dart:convert';
 import 'package:parcial/exports.dart';
-import 'package:parcial/services/api_service.dart';
 
 class HomeFavorites extends StatefulWidget {
   const HomeFavorites({super.key});

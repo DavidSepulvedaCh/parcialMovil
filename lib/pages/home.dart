@@ -1,6 +1,4 @@
-import 'dart:convert';
 import 'package:parcial/exports.dart';
-import 'package:parcial/services/api_service.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});

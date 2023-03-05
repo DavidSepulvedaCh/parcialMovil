@@ -1,5 +1,6 @@
 import '../exports.dart';
 
+// ignore: must_be_immutable
 class ButtonFavorite extends StatefulWidget {
   String? idOffer;
 

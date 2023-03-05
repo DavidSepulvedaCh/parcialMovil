@@ -1,6 +1,7 @@
-import 'package:parcial/models/products.dart';
 import 'package:parcial/exports.dart';
+// ignore: depend_on_referenced_packages
 import 'package:sqflite/sqflite.dart';
+// ignore: depend_on_referenced_packages
 import 'package:path/path.dart';
 
 class SQLiteDB {

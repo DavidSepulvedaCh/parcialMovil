@@ -1,6 +1,5 @@
 import 'package:parcial/exports.dart';
 import 'package:parcial/models/login_request_model.dart';
-import 'package:parcial/services/api_service.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});

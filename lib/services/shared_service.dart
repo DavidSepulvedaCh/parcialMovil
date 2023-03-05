@@ -1,5 +1,6 @@
 import 'package:parcial/models/login_response_model.dart';
 import 'package:parcial/services/api_service.dart';
+// ignore: depend_on_referenced_packages
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SharedService{
