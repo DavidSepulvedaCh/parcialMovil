@@ -61,12 +61,9 @@ class APIService {
         .timeout(const Duration(seconds: 5));
     if (response.statusCode == 200) {
       List<dynamic> jsonList = jsonDecode(response.body);
+      print(jsonList);
       List<Product> productList = jsonList
-          .map((json) => Product(
-              name: json['name'],
-              description: json['description'],
-              photo: json['photo'],
-              price: json['price'].toDouble()))
+          .map((json) => Product.fromJson(json))
           .toList();
       return productList;
     } else {

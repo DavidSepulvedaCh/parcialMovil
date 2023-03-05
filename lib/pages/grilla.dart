@@ -107,7 +107,7 @@ class _GrillaState extends State<Grilla> {
                               width: 20,
                             ),
                             Text(
-                              productss[index].price.toString() + "\$",
+                               "\$ ${productss[index].price}",
                               style: const TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontFamily: 'Raleway'),
