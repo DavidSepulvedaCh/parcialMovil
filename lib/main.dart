@@ -14,10 +14,11 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Parcial',
       debugShowCheckedModeBanner: false,
-      initialRoute: '/login',
+      initialRoute: '/grilla',
       routes: {
         '/':(context) => const HomePage(),
-        '/login':(context) => const Login()
+        '/login':(context) => const Login(),
+        '/grilla':(context) => const Grilla()
       },
     );
   }
