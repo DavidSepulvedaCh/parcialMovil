@@ -15,7 +15,7 @@ class Grilla extends StatefulWidget {
 class _GrillaState extends State<Grilla> {
   List<Product> productss = <Product>[];
   Future<List<Product>> getProducts() async {
-    var register= await APIService.getProducts();
+    var register = await APIService.getProducts();
     return register;
   }
 
@@ -104,17 +104,11 @@ class _GrillaState extends State<Grilla> {
                         ),
                         Row(
                           children: [
-                            const SizedBox(
-                              width: 20,
-                            ),
                             Text(
-                               "\$ ${productss[index].price}",
+                              "\$ ${productss[index].price}",
                               style: const TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontFamily: 'Raleway'),
-                            ),
-                            const SizedBox(
-                              width: 90,
                             ),
                             IconButton(
                               icon: const Icon(
