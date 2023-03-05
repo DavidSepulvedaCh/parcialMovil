@@ -20,6 +20,8 @@ class _LoginState extends State<Login> {
   isLoggedIn() async {
     var session = await SharedService.isLoggedIn();
     if (session) {
+      List<Product> favorites = await APIService.getFavorites();
+      SQLiteDB.saveFavorites(favorites);
       // ignore: use_build_context_synchronously
       Navigator.pushNamed(context, '/');
     }

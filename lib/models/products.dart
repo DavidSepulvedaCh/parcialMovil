@@ -20,4 +20,8 @@ class Product{
     photo = json["photo"];
     price = json["price"].toDouble();
   }
+
+  Map<String, dynamic> toJson(){
+    return { 'id': id, 'name': name, 'description': description, 'photo': photo, 'price': price };
+  }
 }

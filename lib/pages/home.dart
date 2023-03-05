@@ -10,6 +10,9 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+
+  bool favorites = false;
+
   /* ==================Functions================= */
 
   int _currentIndex = 0;
@@ -20,8 +23,14 @@ class _HomePageState extends State<HomePage> {
 
   List<Product> productss = <Product>[];
   Future<List<Product>> getProducts() async {
-    var register= await APIService.getProducts();
-    return register;
+    if(favorites){
+      var register= await APIService.getFavorites();
+      return register;
+    }else{
+      var register= await APIService.getProducts();
+      return register;
+    }
+    
   }
 
   void _onItemTapped(int index) {
@@ -38,7 +47,10 @@ class _HomePageState extends State<HomePage> {
             context, MaterialPageRoute(builder: (context) => const Grilla()));
         break;
       case 2:
-        print("FUNCION DE FAV'S");
+        setState(() {
+          favorites = true;
+          getProducts();
+        });
         break;
       case 3:
         logout();
