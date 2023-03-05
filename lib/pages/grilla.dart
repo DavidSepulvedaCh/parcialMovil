@@ -57,6 +57,59 @@ class _GrillaState extends State<Grilla> {
     }
   }
 
+  Widget gridElement(BuildContext context, int index) {
+    return Card(
+        margin: const EdgeInsets.all(3),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            const SizedBox(
+              height: 5,
+            ),
+            Image.network(productss[index].photo!,
+                height: 90, fit: BoxFit.cover),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Text(
+                  productss[index].name!,
+                  textAlign: TextAlign.left,
+                  style: const TextStyle(
+                      fontWeight: FontWeight.bold, fontFamily: 'Raleway'),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    productss[index].description!,
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(
+                        fontWeight: FontWeight.w200,
+                        fontFamily: 'Raleway',
+                        fontSize: 12),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "\$ ${productss[index].price}",
+                        style: const TextStyle(
+                            fontWeight: FontWeight.bold, fontFamily: 'Raleway'),
+                      ),
+                      ButtonFavorite(idOffer: productss[index].id)
+                    ],
+                  ),
+                )
+              ],
+            )
+          ],
+        ));
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -68,61 +121,12 @@ class _GrillaState extends State<Grilla> {
           automaticallyImplyLeading: false,
         ),
         body: GridView.count(
-          padding: const EdgeInsets.all(5),
-          crossAxisSpacing: 5,
-          mainAxisSpacing: 5,
+          childAspectRatio: 0.8,
+          mainAxisSpacing: 3,
+          crossAxisSpacing: 3,
           crossAxisCount: 2,
           children: List.generate(productss.length, (index) {
-            return Card(
-                margin: const EdgeInsets.all(5),
-                child: Column(
-                  children: [
-                    Column(
-                      children: [
-                        Container(
-                          margin: const EdgeInsets.all(15.0),
-                          child: Image.network(productss[index].photo!,
-                              height: 90, fit: BoxFit.cover),
-                        )
-                      ],
-                    ),
-                    Column(
-                      children: [
-                        Text(
-                          productss[index].name!,
-                          textAlign: TextAlign.left,
-                          style: const TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontFamily: 'Raleway'),
-                        ),
-                        Text(
-                          productss[index].description!,
-                          textAlign: TextAlign.left,
-                          style: const TextStyle(
-                              fontWeight: FontWeight.w200,
-                              fontFamily: 'Raleway'),
-                        ),
-                        Row(
-                          children: [
-                            Text(
-                              "\$ ${productss[index].price}",
-                              style: const TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontFamily: 'Raleway'),
-                            ),
-                            IconButton(
-                              icon: const Icon(
-                                Icons.star,
-                                color: Colors.deepOrangeAccent,
-                              ),
-                              onPressed: () {},
-                            )
-                          ],
-                        )
-                      ],
-                    )
-                  ],
-                ));
+            return gridElement(context, index);
           }),
         ),
         bottomNavigationBar: BottomNavigationBar(
