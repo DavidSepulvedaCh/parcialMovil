@@ -5,22 +5,25 @@ LoginResponseModel loginResponseModel(String str){
 }
 
 class LoginResponseModel {
-    String? name;
+    String? id;
     String? email;
+    String? name;
     String? token;
 
     LoginResponseModel({this.name, this.token, this.email});
 
     LoginResponseModel.fromJson(Map<String, dynamic> json) {
-        name = json['name'];
+        id = json['id'];
         email = json['email'];
+        name = json['name'];
         token = json['token'];
     }
 
     Map<String, dynamic> toJson() {
         final Map<String, dynamic> data = <String, dynamic>{};
-        data['name'] = name;
+        data['id'] = id;
         data['email'] = email;
+        data['name'] = name;
         data['token'] = token;
         return data;
     }

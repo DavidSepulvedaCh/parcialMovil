@@ -17,14 +17,9 @@ class APIService {
     };
     final dataBody = json.encode(model.toJson());
     try {
-      print('before');
       final response = await http.post(url, headers: header, body: dataBody).timeout(const Duration(seconds: 5));
-      print('after');
       if (response.statusCode == 200) {
-        print('before_setloggin');
-        print(response.body);
         await SharedService.setLogginDetails(loginResponseModel(response.body));
-        print('after');
         return 0;
       } else {
         return 1;
@@ -41,9 +36,7 @@ class APIService {
       'Content-Type': 'application/json',
       'Accept': '*/*'
     };
-    final response = await http.post(url, headers: header, body: jsonEncode({'token': token})).timeout(const Duration(seconds: 3));
-    print(response.body);
-    print(response);
+    final response = await http.post(url, headers: header, body: jsonEncode({'token': token})).timeout(const Duration(seconds: 5));
       if (response.statusCode == 200) {
         return true;
       } else {

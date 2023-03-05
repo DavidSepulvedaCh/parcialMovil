@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'package:flutter/services.dart';
 import 'package:parcial/exports.dart';
 import 'package:http/http.dart' as http;
 
@@ -80,7 +79,7 @@ class _HomePageState extends State<HomePage> {
               onTap: () {},
             ),
             IconButton(
-              icon: Icon(Icons.logout),
+              icon: const Icon(Icons.logout),
               onPressed: logout
             ),
           ],

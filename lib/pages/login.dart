@@ -10,6 +10,21 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
+
+  @override
+  void initState() {
+    super.initState();
+    isLoggedIn();
+  }
+
+  isLoggedIn() async {
+    var session = await SharedService.isLoggedIn();
+    if (session) {
+      // ignore: use_build_context_synchronously
+      Navigator.pushNamed(context, '/');
+    }
+  }
+
   bool isRememberMe = false;
   TextEditingController emailTextController= TextEditingController();
   TextEditingController passwordTextController= TextEditingController();
