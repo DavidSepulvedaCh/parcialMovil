@@ -1,19 +1,19 @@
 class Product{
   String? name;
-  String? userName;
-  String? image;
-  String? calification;
+  String? description;
+  String? photo;
+  double? price;
   Product({
     this.name,
-    this.userName,
-    this.image,
-    this.calification
+    this.description,
+    this.photo,
+    this.price
   });
 
   Product.fromJson(Map<String, dynamic> json){
     name = json["name"];
-    userName = json["userName"];
-    image = json["image"];
-    calification = json["calification"];
+    description = json["description"];
+    photo = json["photo"];
+    price = json["price"];
   }
 }

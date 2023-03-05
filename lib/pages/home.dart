@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:parcial/exports.dart';
 import 'package:http/http.dart' as http;
+import 'package:parcial/services/api_service.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -20,15 +21,7 @@ class _HomePageState extends State<HomePage> {
 
   List<Product> productss = <Product>[];
   Future<List<Product>> getProducts() async {
-    var url = 'https://api.npoint.io/9c5fef5b63af7f36fb2d';
-    var rta =
-        await http.get(Uri.parse(url)).timeout(const Duration(seconds: 90));
-    var datos = jsonDecode(rta.body);
-    var register = <Product>[];
-    for (datos in datos) {
-      register.add(Product.fromJson(datos));
-    }
-
+    var register= await APIService.getProducts();
     return register;
   }
 
@@ -85,7 +78,7 @@ class _HomePageState extends State<HomePage> {
                         Expanded(
                           child: Column(
                             children: [
-                              Image.network(productss[index].image!,
+                              Image.network(productss[index].photo!,
                                   height: 120, width: 150, fit: BoxFit.cover),
                             ],
                           ),
@@ -106,14 +99,14 @@ class _HomePageState extends State<HomePage> {
                                 ),
                                 const SizedBox(height: 8),
                                 Text(
-                                  productss[index].userName!,
+                                  productss[index].description!,
                                   style: const TextStyle(
                                       fontStyle: FontStyle.italic,
                                       fontFamily: 'Raleway'),
                                 ),
                                 const SizedBox(height: 8),
                                 Text(
-                                  productss[index].calification!,
+                                  productss[index].price.toString()!,
                                   style: const TextStyle(fontFamily: 'Raleway'),
                                 ),
                                 const SizedBox(height: 8),

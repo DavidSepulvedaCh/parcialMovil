@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/services.dart';
 import 'package:parcial/exports.dart';
-import 'package:http/http.dart' as http;
+import 'package:parcial/services/api_service.dart';
 
 class Grilla extends StatefulWidget {
   const Grilla({super.key});
@@ -15,15 +15,7 @@ class Grilla extends StatefulWidget {
 class _GrillaState extends State<Grilla> {
   List<Product> productss = <Product>[];
   Future<List<Product>> getProducts() async {
-    var url = 'https://api.npoint.io/9c5fef5b63af7f36fb2d';
-    var rta =
-        await http.get(Uri.parse(url)).timeout(const Duration(seconds: 90));
-    var datos = jsonDecode(rta.body);
-    var register = <Product>[];
-    for (datos in datos) {
-      register.add(Product.fromJson(datos));
-    }
-
+    var register= await APIService.getProducts();
     return register;
   }
 
@@ -88,7 +80,7 @@ class _GrillaState extends State<Grilla> {
                       children: [
                         Container(
                           margin: const EdgeInsets.all(15.0),
-                          child: Image.network(productss[index].image!,
+                          child: Image.network(productss[index].photo!,
                               height: 90, fit: BoxFit.cover),
                         )
                       ],
@@ -103,7 +95,7 @@ class _GrillaState extends State<Grilla> {
                               fontFamily: 'Raleway'),
                         ),
                         Text(
-                          productss[index].userName!,
+                          productss[index].description!,
                           textAlign: TextAlign.left,
                           style: const TextStyle(
                               fontWeight: FontWeight.w200,
@@ -115,7 +107,7 @@ class _GrillaState extends State<Grilla> {
                               width: 20,
                             ),
                             Text(
-                              productss[index].calification!,
+                              productss[index].price.toString() + "\$",
                               style: const TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontFamily: 'Raleway'),

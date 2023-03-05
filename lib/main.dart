@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Parcial',
       debugShowCheckedModeBanner: false,
-      initialRoute: '/grilla',
+      initialRoute: '/login',
       routes: {
         '/':(context) => const HomePage(),
         '/login':(context) => const Login(),
