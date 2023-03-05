@@ -106,7 +106,7 @@ class _HomePageState extends State<HomePage> {
                                 ),
                                 const SizedBox(height: 8),
                                 Text(
-                                  productss[index].price.toString()!,
+                                  productss[index].price.toString(),
                                   style: const TextStyle(fontFamily: 'Raleway'),
                                 ),
                                 const SizedBox(height: 8),
