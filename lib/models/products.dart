@@ -1,9 +1,12 @@
 class Product{
+  String? id;
   String? name;
   String? description;
   String? photo;
   double? price;
+
   Product({
+    this.id,
     this.name,
     this.description,
     this.photo,
@@ -11,9 +14,10 @@ class Product{
   });
 
   Product.fromJson(Map<String, dynamic> json){
+    id = json["_id"];
     name = json["name"];
     description = json["description"];
     photo = json["photo"];
-    price = json["price"];
+    price = json["price"].toDouble();
   }
 }
