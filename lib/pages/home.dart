@@ -63,6 +63,7 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         title: const Text('Lista de productos'),
         backgroundColor: Colors.deepOrange,
+        automaticallyImplyLeading: false,
       ),
       body: Center(
         child: ListView.builder(
