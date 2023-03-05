@@ -126,7 +126,7 @@ class _HomeFavoritesState extends State<HomeFavorites> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Lista de productos'),
+        title: const Text('Favoritos'),
         backgroundColor: Colors.deepOrange,
         automaticallyImplyLeading: false,
       ),
@@ -147,7 +147,7 @@ class _HomeFavoritesState extends State<HomeFavorites> {
             label: 'Grilla',
           ),
           const BottomNavigationBarItem(
-            icon: Icon(Icons.all_inbox, color: Colors.deepOrange),
+            icon: Icon(Icons.arrow_back_ios, color: Colors.deepOrange),
             label: 'Favoritos',
           ),
           const BottomNavigationBarItem(

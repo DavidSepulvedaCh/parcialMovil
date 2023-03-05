@@ -114,7 +114,7 @@ class _GrillaFavoritesState extends State<GrillaFavorites> {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
-          title: const Text('Lista de productos'),
+          title: const Text('Favoritos'),
           backgroundColor: Colors.deepOrange,
           automaticallyImplyLeading: false,
         ),
@@ -141,7 +141,7 @@ class _GrillaFavoritesState extends State<GrillaFavorites> {
               label: 'GrillaFavorites',
             ),
             const BottomNavigationBarItem(
-              icon: Icon(Icons.all_inbox, color: Colors.deepOrange),
+              icon: Icon(Icons.arrow_back_ios, color: Colors.deepOrange),
               label: 'Favoritos',
             ),
             const BottomNavigationBarItem(
