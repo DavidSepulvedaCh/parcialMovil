@@ -1,13 +1,13 @@
 import 'package:parcial/exports.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+class Favorites extends StatefulWidget {
+  const Favorites({super.key});
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<Favorites> createState() => _FavoritesState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _FavoritesState extends State<Favorites> {
   late Widget view = Container();
   int _currentIndex = 0;
 
@@ -22,6 +22,7 @@ class _HomePageState extends State<HomePage> {
   Future<void> setProducts() async {
     await getProducts().then((value) {
       setState(() {
+        productss.clear();
         productss.addAll(value);
         view = ListProducts(products: productss);
       });
@@ -30,7 +31,7 @@ class _HomePageState extends State<HomePage> {
 
   List<Product> productss = <Product>[];
   Future<List<Product>> getProducts() async {
-    var register = await APIService.getProducts();
+    var register = await SQLiteDB.getFavorites();
     return register;
   }
 
@@ -40,19 +41,19 @@ class _HomePageState extends State<HomePage> {
     });
     switch (index) {
       case 0:
-      setState(() {
-          view = ListProducts(products: productss);
+        setState(() {
+          setProducts().then((value) => view = ListProducts(products: productss));
         });
         break;
       case 1:
         setState(() {
-          view = GridProducts(products: productss);
+          setProducts().then((value) => view = GridProducts(products: productss));
         });
         break;
       case 2:
         setState(() {
           Navigator.pushReplacement(context,
-              MaterialPageRoute(builder: (context) => const Favorites()));
+              MaterialPageRoute(builder: (context) => const HomePage()));
         });
         break;
       case 3:
@@ -65,7 +66,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Lista de productos'),
+        title: const Text('Favoritos'),
         backgroundColor: Colors.deepOrange,
         automaticallyImplyLeading: false,
       ),
@@ -86,7 +87,7 @@ class _HomePageState extends State<HomePage> {
             label: 'Grilla',
           ),
           const BottomNavigationBarItem(
-            icon: Icon(Icons.favorite, color: Colors.deepOrange),
+            icon: Icon(Icons.arrow_back_ios, color: Colors.deepOrange),
             label: 'Favoritos',
           ),
           const BottomNavigationBarItem(
